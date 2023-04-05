@@ -9,15 +9,17 @@ import co.com.travely.usecase.save.SaveUseCase;
 
 import co.com.travely.usecase.update.UpdateUseCase;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springdoc.core.annotations.RouterOperation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.RouterFunction;
@@ -45,7 +47,7 @@ public class RouterRest {
             responses = {
                     @ApiResponse(responseCode = "200", description = "Success",
                             content = @Content(schema = @Schema(implementation = Product.class))),
-                    @ApiResponse(responseCode = "204", description = "Nothing to show")
+                    @ApiResponse(responseCode = "204", description = "Database Empty")
             }))
     public RouterFunction<ServerResponse> getAllProducts(GetAllUseCase useCase) {
         return route(GET("/products"),
@@ -61,6 +63,10 @@ public class RouterRest {
             beanClass = GetByIdUseCase.class, method = RequestMethod.GET,
             beanMethod = "apply",
             operation = @Operation(operationId = "getById", tags = "Usecases",
+                    parameters = {
+                            @Parameter(name = "id", description = "Product ID", required = true, in = ParameterIn.PATH)
+
+                    },
                     responses = {
                             @ApiResponse(responseCode = "200", description = "Success",
                                     content = @Content(schema = @Schema(implementation = Product.class))),
@@ -81,11 +87,19 @@ public class RouterRest {
             beanClass = SaveUseCase.class, method = RequestMethod.POST,
             beanMethod = "apply",
             operation = @Operation(operationId = "save", tags = "Usecases",
+                    parameters = {
+                            @Parameter(name = "product", in = ParameterIn.PATH, schema = @Schema(implementation = Product.class))
+                    },
                     responses = {
-                            @ApiResponse(responseCode = "200", description = "Success",
+                            @ApiResponse(responseCode = "201", description = "Success",
                                     content = @Content(schema = @Schema(implementation = Product.class))),
                             @ApiResponse(responseCode = "406", description = "Not acceptable")
-                    }))
+                    },
+                    requestBody = @RequestBody(required = true, description = "Save a product with this schema", content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Product.class)))))
+    /*@RequestBody(required = true,
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Product.class)))*/
     public RouterFunction<ServerResponse> saveProduct(SaveUseCase useCase) {
         return route(POST("/products").and(accept(MediaType.APPLICATION_JSON)),
                 request -> request.bodyToMono(Product.class)
@@ -102,11 +116,17 @@ public class RouterRest {
             beanClass = UpdateUseCase.class, method = RequestMethod.PUT,
             beanMethod = "apply",
             operation = @Operation(operationId = "update", tags = "Usecases",
+                    parameters = {
+                        @Parameter(name = "id", description = "Product ID", required = true, in = ParameterIn.PATH),
+                        @Parameter(name = "product", in = ParameterIn.PATH, schema = @Schema(implementation = Product.class))
+                    },
                     responses = {
-                            @ApiResponse(responseCode = "200", description = "Success",
+                            @ApiResponse(responseCode = "201", description = "Success",
                                     content = @Content(schema = @Schema(implementation = Product.class))),
                             @ApiResponse(responseCode = "404", description = "Product Not Found")
-                    }))
+                    },
+                    requestBody = @RequestBody(required = true, description = "Update a product with this schema", content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Product.class)))))
     public  RouterFunction<ServerResponse> updateProduct(UpdateUseCase useCase){
         return route(PUT("/products/{id}").and(accept(MediaType.APPLICATION_JSON)),
                 request -> request.bodyToMono(Product.class)
@@ -123,6 +143,9 @@ public class RouterRest {
             beanClass = DeleteUseCase.class, method = RequestMethod.DELETE,
             beanMethod = "apply",
             operation = @Operation(operationId = "delete", tags = "Usecases",
+                    parameters = {
+                            @Parameter(name = "id", description = "Product ID", required = true, in = ParameterIn.PATH)
+                    },
                     responses = {
                             @ApiResponse(responseCode = "200", description = "Success",
                                     content = @Content(schema = @Schema(implementation = Product.class))),
