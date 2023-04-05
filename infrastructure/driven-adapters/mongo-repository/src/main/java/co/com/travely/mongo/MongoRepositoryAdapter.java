@@ -4,6 +4,7 @@ import co.com.travely.model.products.Product;
 import co.com.travely.model.products.gateways.ProductsGateway;
 import co.com.travely.mongo.data.ProductData;
 import co.com.travely.mongo.helper.AdapterOperations;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
@@ -11,7 +12,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Repository
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class MongoRepositoryAdapter implements ProductsGateway {
 
     private final MongoDBRepository productDataRepo;
