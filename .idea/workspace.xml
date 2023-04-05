@@ -5,18 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c4e7a850-9411-4ba3-b848-9a09f3f449e7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/infrastructure/driven-adapters/mongo-repository/src/main/java/co/com/travely/mongo/data/ProductData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/entry-points/reactive-web/src/main/java/co/com/travely/api/RouterRest.java" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/entry-points/reactive-web/src/main/java/co/com/travely/api/RouterRest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +39,13 @@
         </projects_view>
       </state>
     </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -82,7 +81,7 @@
       <command value="gradle gep --type webflux" />
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.travelyBackend [gep --type webflux]">
+  <component name="RunManager">
     <configuration name="travelyBackend [gda --type mongodb]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -235,6 +234,106 @@
       <option name="presentableId" value="Default" />
       <updated>1680480724175</updated>
     </task>
+    <task id="LOCAL-00001" summary="Initial setup">
+      <created>1680489205573</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1680489205573</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Initial setup, swagger setup">
+      <created>1680535104461</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1680535104461</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Database Setup">
+      <created>1680535177963</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1680535177963</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Product class created">
+      <created>1680535255106</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1680535255106</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Config files. Beans configuration added">
+      <created>1680535420259</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1680535420259</updated>
+    </task>
+    <task id="LOCAL-00006" summary="CRUD use cases created">
+      <created>1680535469947</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1680535469947</updated>
+    </task>
+    <task id="LOCAL-00007" summary="RouterRest created with swagger implementation">
+      <created>1680535532236</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1680535532236</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Mongo Repository created">
+      <created>1680535556993</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1680535556993</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Products gateway created">
+      <created>1680535570727</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1680535570727</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Repository adapter created">
+      <created>1680535595699</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1680535595699</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Swagger setup">
+      <created>1680535626301</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1680535626301</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Generated RouterRest Test">
+      <created>1680535651477</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1680535651477</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial setup" />
+    <MESSAGE value="Initial setup, swagger setup" />
+    <MESSAGE value="Database Setup" />
+    <MESSAGE value="Product class created" />
+    <MESSAGE value="Config files. Beans configuration added" />
+    <MESSAGE value="CRUD use cases created" />
+    <MESSAGE value="RouterRest created with swagger implementation" />
+    <MESSAGE value="Mongo Repository created" />
+    <MESSAGE value="Products gateway created" />
+    <MESSAGE value="Repository adapter created" />
+    <MESSAGE value="Swagger setup" />
+    <MESSAGE value="Generated RouterRest Test" />
+    <option name="LAST_COMMIT_MESSAGE" value="Generated RouterRest Test" />
   </component>
 </project>
