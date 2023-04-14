@@ -8,6 +8,9 @@ dependencies {
     implementation project(':usecase')
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webflux-ui', version: '2.0.4'
+    implementation 'javax.mail:javax.mail-api:1.6.2'
+    implementation 'com.sun.mail:javax.mail:1.6.2'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
     runtimeOnly('org.springframework.boot:spring-boot-devtools')
 }
 
