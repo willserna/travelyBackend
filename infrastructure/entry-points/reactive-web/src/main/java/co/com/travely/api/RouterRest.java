@@ -1,6 +1,9 @@
 package co.com.travely.api;
 
 import co.com.travely.model.products.Product;
+import co.com.travely.usecase.GetByCategory.GetByCategoryUseCase;
+import co.com.travely.usecase.GetByPackageName.GetByPackageNameUseCase;
+import co.com.travely.usecase.GetFeatured.GetFeaturedUseCase;
 import co.com.travely.usecase.delete.DeleteUseCase;
 import co.com.travely.usecase.getall.GetAllUseCase;
 import co.com.travely.usecase.getbyid.GetByIdUseCase;
@@ -58,6 +61,25 @@ public class RouterRest {
     }
 
     @Bean
+    @RouterOperation(path = "/products/featured", produces = {
+            MediaType.APPLICATION_JSON_VALUE},
+            beanClass = GetFeaturedUseCase.class, method = RequestMethod.GET,
+            beanMethod = "get",
+            operation = @Operation(operationId = "getFeatured", tags = "Usecases",
+                    responses = {
+                            @ApiResponse(responseCode = "200", description = "Success",
+                                    content = @Content(schema = @Schema(implementation = Product.class))),
+                            @ApiResponse(responseCode = "204", description = "Database Empty")
+                    }))
+    public RouterFunction<ServerResponse> getFeaturedProducts(GetFeaturedUseCase useCase) {
+        return route(GET("/products/featured"),
+                request -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(BodyInserters.fromPublisher(useCase.get(), Product.class))
+                        .onErrorResume(throwable -> ServerResponse.noContent().build()));
+    }
+
+    @Bean
     @RouterOperation(path = "/products/{id}", produces = {
             MediaType.APPLICATION_JSON_VALUE},
             beanClass = GetByIdUseCase.class, method = RequestMethod.GET,
@@ -82,6 +104,56 @@ public class RouterRest {
     }
 
     @Bean
+    @RouterOperation(path = "/products/packagename/{name}", produces = {
+            MediaType.APPLICATION_JSON_VALUE},
+            beanClass = GetByPackageNameUseCase.class, method = RequestMethod.GET,
+            beanMethod = "apply",
+            operation = @Operation(operationId = "getByPackageName", tags = "Usecases",
+                    parameters = {
+                            @Parameter(name = "name", description = "Product Name", required = true, in = ParameterIn.PATH)
+
+                    },
+                    responses = {
+                            @ApiResponse(responseCode = "200", description = "Success",
+                                    content = @Content(schema = @Schema(implementation = Product.class))),
+                            @ApiResponse(responseCode = "404", description = "Product Not Found")
+                    }))
+    public RouterFunction<ServerResponse> getProductByPackageName(GetByPackageNameUseCase useCase){
+        return route(GET("/products/packagename/{name}"),
+                request -> useCase.apply(request.pathVariable("name"))
+                        .collectList()
+                        .flatMap(products -> ServerResponse.ok()
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .bodyValue(products))
+                        .onErrorResume(throwable -> ServerResponse.noContent().build()));
+    }
+
+    @Bean
+    @RouterOperation(path = "/products/category/{category}", produces = {
+            MediaType.APPLICATION_JSON_VALUE},
+            beanClass = GetByCategoryUseCase.class, method = RequestMethod.GET,
+            beanMethod = "apply",
+            operation = @Operation(operationId = "getByCategory", tags = "Usecases",
+                    parameters = {
+                            @Parameter(name = "category", description = "Product category", required = true, in = ParameterIn.PATH)
+
+                    },
+                    responses = {
+                            @ApiResponse(responseCode = "200", description = "Success",
+                                    content = @Content(schema = @Schema(implementation = Product.class))),
+                            @ApiResponse(responseCode = "404", description = "Product Not Found")
+                    }))
+    public RouterFunction<ServerResponse> getProductByCategory(GetByCategoryUseCase useCase){
+        return route(GET("/products/category/{category}"),
+                request -> useCase.apply(request.pathVariable("category"))
+                        .collectList()
+                        .flatMap(products -> ServerResponse.ok()
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .bodyValue(products))
+                        .onErrorResume(throwable -> ServerResponse.noContent().build()));
+    }
+
+    @Bean
     @RouterOperation(path = "/products", produces = {
             MediaType.APPLICATION_JSON_VALUE},
             beanClass = SaveUseCase.class, method = RequestMethod.POST,
@@ -97,9 +169,6 @@ public class RouterRest {
                     },
                     requestBody = @RequestBody(required = true, description = "Save a product with this schema", content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = Product.class)))))
-    /*@RequestBody(required = true,
-            content = @Content(mediaType = "application/json",
-                    schema = @Schema(implementation = Product.class)))*/
     public RouterFunction<ServerResponse> saveProduct(SaveUseCase useCase) {
         return route(POST("/products").and(accept(MediaType.APPLICATION_JSON)),
                 request -> request.bodyToMono(Product.class)
@@ -159,6 +228,8 @@ public class RouterRest {
                         .onErrorResume(throwable -> ServerResponse.notFound().build()));
 
     }
+
+
 
 
 }

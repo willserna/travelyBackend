@@ -15,4 +15,10 @@ public interface ProductsGateway {
     Mono<String> deleteProduct(String id);
 
     Mono<Product> updateProduct(String id, Product product);
+    Flux<Product> getProductsByCategory(String category);
+    Flux<Product> getProductsByPackageName(String name);
+    Flux<Product> getProductsByLocation(String location);
+    Flux<Product> getProductsFeatured();
+
+    Flux<Product> getByCategory(String category);
 }

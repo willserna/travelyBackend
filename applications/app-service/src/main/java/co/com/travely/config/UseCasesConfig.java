@@ -1,6 +1,9 @@
 package co.com.travely.config;
 
 import co.com.travely.model.products.gateways.ProductsGateway;
+import co.com.travely.usecase.GetByCategory.GetByCategoryUseCase;
+import co.com.travely.usecase.GetByPackageName.GetByPackageNameUseCase;
+import co.com.travely.usecase.GetFeatured.GetFeaturedUseCase;
 import co.com.travely.usecase.delete.DeleteUseCase;
 import co.com.travely.usecase.getall.GetAllUseCase;
 import co.com.travely.usecase.getbyid.GetByIdUseCase;
@@ -42,5 +45,20 @@ public class UseCasesConfig {
         @Bean
         public DeleteUseCase deleteProductUseCase(ProductsGateway gateway){
                 return new DeleteUseCase(gateway);
+        }
+
+        @Bean
+        GetFeaturedUseCase getFeaturedUseCase(ProductsGateway gateway){
+                return new GetFeaturedUseCase(gateway);
+        }
+
+        @Bean
+        GetByPackageNameUseCase getByPackageNameUseCase(ProductsGateway gateway){
+                return new GetByPackageNameUseCase(gateway);
+        }
+
+        @Bean
+        GetByCategoryUseCase getByCategoryUseCase(ProductsGateway gateway){
+                return new GetByCategoryUseCase(gateway);
         }
 }

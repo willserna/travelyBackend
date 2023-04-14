@@ -3,8 +3,6 @@ package co.com.travely.mongo;
 import co.com.travely.model.products.Product;
 import co.com.travely.model.products.gateways.ProductsGateway;
 import co.com.travely.mongo.data.ProductData;
-import co.com.travely.mongo.helper.AdapterOperations;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
@@ -12,7 +10,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Repository
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class MongoRepositoryAdapter implements ProductsGateway {
 
     private final MongoDBRepository productDataRepo;
@@ -63,8 +61,40 @@ public class MongoRepositoryAdapter implements ProductsGateway {
                 .map(productData -> mapper.map(productData, Product.class));
     }
 
+    @Override
+    public Flux<Product> getProductsByPackageName(String name) {
+        return this.productDataRepo
+                .findByPackageName(name)
+                .switchIfEmpty(Flux.empty())
+                .map(productData -> mapper.map(productData, Product.class));
 
+    }
 
+    @Override
+    public Flux<Product> getProductsByCategory(String name) {
+        return null;
+    }
+
+    @Override
+    public Flux<Product> getProductsByLocation(String location) {
+        return null;
+    }
+
+    @Override
+    public Flux<Product> getProductsFeatured() {
+        return this.productDataRepo
+                .findByFeaturedIsTrue()
+                .switchIfEmpty(Mono.empty())
+                .map(productData -> mapper.map(productData, Product.class));
+    }
+
+    @Override
+    public Flux<Product> getByCategory(String category) {
+        return this.productDataRepo
+                .findByCategory(category)
+                .switchIfEmpty(Mono.empty())
+                .map(productData -> mapper.map(productData, Product.class));
+    }
 
 
     /**public MongoRepositoryAdapter(MongoDBRepository repository, ObjectMapper mapper) {
