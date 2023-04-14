@@ -20,4 +20,9 @@ public class ProductData {
     private Integer stock;
     private Date startDate;
     private Integer persons;
+    private Boolean featured;
+    private String category;
+    private String description;
+    private String image;
+    private Double price;
 }
